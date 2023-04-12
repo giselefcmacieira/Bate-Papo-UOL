@@ -40,3 +40,11 @@ function nomeInvalido(erro){
     console.log('Nome inválido!');
     console.log('Status code: ' + erro.response.status);
 }
+function abrirMenuLateral(){
+    const menuLateral = document.querySelector(".caixa-menulateral");
+    menuLateral.classList.remove('escondido');
+}
+function fecharMenuLateral(menu){
+    const conteinerDoMenu = menu.parentNode;
+    conteinerDoMenu.classList.add('escondido');
+}
