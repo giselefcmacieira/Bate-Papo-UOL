@@ -64,3 +64,55 @@
     height: 26px;
     width: 26px;
 }
+.tela-de-entrada{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 72px;
+}
+.tela-de-entrada img{
+    width: 33%;
+    margin-bottom: 94px;
+}
+.escrever-nome{
+    width: 70%;
+    height: 54px;
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+    text-align: center;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    color: black;
+    margin-bottom: 15px;
+}
+.escrever-nome::placeholder{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+    color: #AEAEAE;
+}
+.escondido{
+    display: none;
+}
+.botao-entrar{
+    background-color: #E7E7E7;
+    width: 30%;
+    height: 45px;
+    border-radius: 9px;
+    border: none;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+    color: #696969;
+}

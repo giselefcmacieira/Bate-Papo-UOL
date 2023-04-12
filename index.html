@@ -12,7 +12,12 @@
     <title>Batepapo UOL</title>
 </head>
 <body>
-    <div class ="conteudo">
+    <div class ="tela-de-entrada"><!--Layout inicial para receber o nome do usuário-->
+        <img src="./imagens/bate-papo-uol.jpg"/>
+        <input class="escrever-nome" type="text" placeholder="Digite seu nome"> 
+        <button onclick="cadastrarNome()" class="botao-entrar"><p>Entrar</p></button>
+    </div>
+    <div class ="conteudo escondido"> <!--Layout para receber as mensagens-->
         <div class ="cabecalho">
             <img src="./imagens/bate-papo-uol.jpg"/>
             <ion-icon class ="icone" name="people"></ion-icon>
