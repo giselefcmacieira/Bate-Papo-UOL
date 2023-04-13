@@ -26,7 +26,7 @@ function conferirAtividade(){
 }
 function presencaConfirmada(resp){
     console.log(resp);
-    console.log('foi sucesso na conferência!')
+    console.log('foi sucesso na conferência!');
 }
 function erroNaPresenca(errop){
     console.log(errop);
@@ -67,8 +67,7 @@ function nomeInvalido(erro){
         telaInicial.innerHTML = `
         <img src="./imagens/bate-papo-uol.jpg"/>
         <input class="escrever-nome" type="text" placeholder="Digite seu nome"> 
-        <button onclick="cadastrarNome()" class="botao-entrar"><p>Entrar</p></button>`
-        alert('Nome inserido já está em uso, favor inserir nome válido');
+        <button onclick="cadastrarNome()" class="botao-entrar"><p>Entrar</p></button>`;
     }
     console.log('Nome inválido!');
     console.log('Status code: ' + erro.response.status);
@@ -90,7 +89,7 @@ function renderizarMensagens(listaDeMensagens){
             </li>`
         }else if(tipoDeMensagem == 'status'){
             containerMensagens.innerHTML += `
-            <li class="status">
+            <li data-test="message" class="status">
                 <p class="horario">${listaDeMensagens[i].time}</p>
                 <p class="nome">${listaDeMensagens[i].from}</p>
                 <p class="texto-mensagem">${listaDeMensagens[i].text}</p>
