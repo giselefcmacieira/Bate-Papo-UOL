@@ -1,6 +1,37 @@
 axios.defaults.headers.common['Authorization'] = '2hWzO5hSANW5w7MslYJt2FIL';
 
 
+let nome = '';
+function buscarMensagens(){
+    const promessaMensagens = axios.get('https://mock-api.driven.com.br/api/vm/uol/messages');
+    promessaMensagens.then(mensagensBuscadas);
+    promessaMensagens.catch(erroMensagens);
+}
+function mensagensBuscadas(respm){
+    console.log(respm.data);
+    console.log('Mensagens buscadas com sucesso!');
+    renderizarMensagens(respm.data);
+}
+function erroMensagens(errom){
+    console.log(errom);
+    console.log('Erro na busca das mensagens!');
+}
+
+function conferirAtividade(){
+    const dadosConferencia = {name: `${nome}`};
+    const promessaPresenca = axios.post('https://mock-api.driven.com.br/api/vm/uol/status',dadosConferencia);
+    console.log(promessaPresenca);
+    promessaPresenca.then(presencaConfirmada);
+    promessaPresenca.catch(erroNaPresenca);
+}
+function presencaConfirmada(resp){
+    console.log(resp);
+    console.log('foi sucesso na conferência!')
+}
+function erroNaPresenca(errop){
+    console.log(errop);
+    console.log('Deu BO na conferência!')
+}
 
 function cadastrarNome(){
     //encontrando o nome do usuário
@@ -10,9 +41,9 @@ function cadastrarNome(){
     <img src="./imagens/bate-papo-uol.jpg"/>
     <img src="./imagens/Loading-PNG.gif"/>
     <p>Entrando...</p>`
-    const nome = inputNome.value;
-    console.log(nome);
+    nome = inputNome.value;
     const nomeParaCadastro = {name: `${nome}`};
+    console.log(nomeParaCadastro);
     const promessaNome = axios.post('https://mock-api.driven.com.br/api/vm/uol/participants', nomeParaCadastro);
     console.log(promessaNome);
     promessaNome.then(nomeCadastrado);
@@ -25,7 +56,9 @@ function nomeCadastrado(resposta){
     conteudo.classList.remove('escondido');
     console.log('Nome cadastrado com sucesso!');
     console.log(resposta);
-    console.log(resposta.status);
+    buscarMensagens();
+    setInterval(buscarMensagens, 3000);
+    setInterval(conferirAtividade, 5000);
 }
 function nomeInvalido(erro){
     const tipoDeErroNome = erro.response.status;
@@ -40,6 +73,21 @@ function nomeInvalido(erro){
     console.log('Nome inválido!');
     console.log('Status code: ' + erro.response.status);
 }
+function renderizarMensagens(listaDeMensagens){
+    const containerMensagens = document.querySelector('.container-mensagens');
+    containerMensagens.innerHTML = '';
+    for(let i = 0; i < listaDeMensagens.length; i++){
+    containerMensagens.innerHTML += `
+    <li class="mensagem">
+        <p class="horario">${listaDeMensagens[i].time}</p>
+        <p class="nome">${listaDeMensagens[i].from}</p>
+        <p class="texto-mensagem">para</p> 
+        <p class="nome">${listaDeMensagens[i].to}</p>
+        <p class="texto-mensagem">${listaDeMensagens[i].text}</p>
+    </li>`
+    }
+}
+
 function abrirMenuLateral(){
     const menuLateral = document.querySelector(".caixa-menulateral");
     menuLateral.classList.remove('escondido');

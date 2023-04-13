@@ -5,7 +5,7 @@
     background-color: #E5E5E5; /*#E5E5E5*/
     margin-top: 80px;
     margin-bottom: 80px;
-    height: 3000px;
+    height: 100%;
     padding-top: 26px;
     padding-bottom: 10px;
 }
@@ -141,7 +141,7 @@
 }
 .menu-lateral{
     background-color: white;
-    position: relative;
+    position: fixed;
     bottom: 0px;
     left: 30%;
     width: 70%;
@@ -151,6 +151,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    z-index: 3;
 }
 .menu-lateral p{
     font-family: 'Roboto';
@@ -204,4 +205,45 @@
 .icone-menu-visibilidade{
     width: 20px;
     height: 26px;
+}
+.mensagem{
+    background-color: white;
+    width: 100%;
+    padding: 12px 8px;
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+.horario{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    align-items: center;
+    color: #AAAAAA;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.texto-mensagem{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: black;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.nome{
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    align-items: center;
+    color: black;
+    margin-right: 5px;
+    margin-bottom: 3px;
 }
