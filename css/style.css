@@ -215,6 +215,18 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
+    text-align: center;
+}
+.status{
+    background-color: #DCDCDC;
+    width: 100%;
+    padding: 12px 8px;
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
 }
 .horario{
     font-family: 'Roboto';
@@ -239,11 +251,16 @@
 }
 .nome{
     font-family: 'Roboto';
-    font-weight: 700;
+    font-style: normal;
+    font-weight: 600;
     font-size: 14px;
     line-height: 16px;
     align-items: center;
     color: black;
     margin-right: 5px;
     margin-bottom: 3px;
+}
+.botao-enviar-mensagem{
+    border: none;
+    background-color: white;
 }

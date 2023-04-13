@@ -8,7 +8,7 @@ function buscarMensagens(){
     promessaMensagens.catch(erroMensagens);
 }
 function mensagensBuscadas(respm){
-    console.log(respm.data);
+    console.log(respm);
     console.log('Mensagens buscadas com sucesso!');
     renderizarMensagens(respm.data);
 }
@@ -30,7 +30,7 @@ function presencaConfirmada(resp){
 }
 function erroNaPresenca(errop){
     console.log(errop);
-    console.log('Deu BO na conferência!')
+    console.log('Deu BO na conferência!');
 }
 
 function cadastrarNome(){
@@ -77,15 +77,52 @@ function renderizarMensagens(listaDeMensagens){
     const containerMensagens = document.querySelector('.container-mensagens');
     containerMensagens.innerHTML = '';
     for(let i = 0; i < listaDeMensagens.length; i++){
-    containerMensagens.innerHTML += `
-    <li class="mensagem">
-        <p class="horario">${listaDeMensagens[i].time}</p>
-        <p class="nome">${listaDeMensagens[i].from}</p>
-        <p class="texto-mensagem">para</p> 
-        <p class="nome">${listaDeMensagens[i].to}</p>
-        <p class="texto-mensagem">${listaDeMensagens[i].text}</p>
-    </li>`
+        const tipoDeMensagem = listaDeMensagens[i].type;
+        console.log(typeof(tipoDeMensagem));
+        if(tipoDeMensagem == 'message'){
+            containerMensagens.innerHTML += `
+            <li data-test="message" class="mensagem">
+                <p class="horario">${listaDeMensagens[i].time}</p>
+                <p class="nome">${listaDeMensagens[i].from}</p>
+                <p class="texto-mensagem">para</p> 
+                <p class="nome">${listaDeMensagens[i].to}</p>
+                <p class="texto-mensagem">${listaDeMensagens[i].text}</p>
+            </li>`
+        }else if(tipoDeMensagem == 'status'){
+            containerMensagens.innerHTML += `
+            <li class="status">
+                <p class="horario">${listaDeMensagens[i].time}</p>
+                <p class="nome">${listaDeMensagens[i].from}</p>
+                <p class="texto-mensagem">${listaDeMensagens[i].text}</p>
+            </li>`
+        }
     }
+}
+
+function enviarMensagem(){
+    const inputMensagem = document.querySelector(".escrever-mensagem");
+    const mensagem = inputMensagem.value;
+    const mensagemASerEnviada = {
+        from: `${nome}`,
+        to: "Todos",
+        text: `${mensagem}`,
+        type: "message" // ou "private_message" para o bônus
+    };
+    const promessaMensagem = axios.post('https://mock-api.driven.com.br/api/vm/uol/messages', mensagemASerEnviada);
+    promessaMensagem.then(mensagemEnviadaComSucesso);
+    promessaMensagem.catch(erroAoEnviarAMensagem);
+}
+function mensagemEnviadaComSucesso(respostaEnvioMensagem){
+    console.log(respostaEnvioMensagem);
+    console.log('Mensagem eviada com sucesso!');
+    const inputMensagem = document.querySelector(".escrever-mensagem");
+    inputMensagem.value = '';
+    buscarMensagens();
+}
+function erroAoEnviarAMensagem(erroDaMensagem){
+    console.log(erroDaMensagem);
+    console.log('Deu erro ao enviar a mensagem para o servidor!');
+    window.location.reload();
 }
 
 function abrirMenuLateral(){

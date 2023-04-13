@@ -32,8 +32,10 @@
         </li>
         </ul>
         <div class="rodape">
-            <input class="escrever-mensagem" type="text" placeholder="Escreva aqui...">
-            <ion-icon class="icone-mensagem" name="paper-plane-outline"></ion-icon>
+            <input data-test="input-message" class="escrever-mensagem" type="text" placeholder="Escreva aqui...">
+            <button data-test="send-message" class="botao-enviar-mensagem" onclick= "enviarMensagem()">
+                <ion-icon data-test="send-message" class="icone-mensagem" name="paper-plane-outline"></ion-icon>
+            </button>
         </div>
     </div>
     <div class="caixa-menulateral escondido">
