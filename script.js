@@ -63,11 +63,12 @@ function nomeCadastrado(resposta){
 function nomeInvalido(erro){
     const tipoDeErroNome = erro.response.status;
     if(tipoDeErroNome == 400){
-        const telaInicial = document.querySelector(".tela-de-entrada");
+        window.location.reload();
+        /*const telaInicial = document.querySelector(".tela-de-entrada");
         telaInicial.innerHTML = `
         <img src="./imagens/bate-papo-uol.jpg"/>
         <input class="escrever-nome" type="text" placeholder="Digite seu nome"> 
-        <button onclick="cadastrarNome()" class="botao-entrar"><p>Entrar</p></button>`;
+        <button onclick="cadastrarNome()" class="botao-entrar"><p>Entrar</p></button>`;*/
     }
     console.log('Nome inválido!');
     console.log('Status code: ' + erro.response.status);
