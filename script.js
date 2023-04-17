@@ -32,6 +32,18 @@ function erroNaPresenca(errop){
     console.log(errop);
     console.log('Deu BO na conferência!');
 }
+function buscarUsuarios(){
+    const promessaUsuarios = axios.get('https://mock-api.driven.com.br/api/vm/uol/participants');
+    promessaUsuarios.then(usuariosBuscados);
+    promessaUsuarios.catch(erroUsuarios);
+}
+function usuariosBuscados(usuarios){
+    console.log('Usuarios buscados');
+    renderizarUsuarios(usuarios.data);
+}
+function erroUsuarios(erroU){
+    console.log(erroU);
+}
 
 function cadastrarNome(){
     //encontrando o nome do usuário
@@ -57,22 +69,20 @@ function nomeCadastrado(resposta){
     console.log('Nome cadastrado com sucesso!');
     console.log(resposta);
     buscarMensagens();
+    buscarUsuarios();
     setInterval(buscarMensagens, 3000);
+    setInterval(buscarUsuarios, 10000);
     setInterval(conferirAtividade, 5000);
 }
 function nomeInvalido(erro){
     const tipoDeErroNome = erro.response.status;
     if(tipoDeErroNome == 400){
         window.location.reload();
-        /*const telaInicial = document.querySelector(".tela-de-entrada");
-        telaInicial.innerHTML = `
-        <img src="./imagens/bate-papo-uol.jpg"/>
-        <input class="escrever-nome" type="text" placeholder="Digite seu nome"> 
-        <button onclick="cadastrarNome()" class="botao-entrar"><p>Entrar</p></button>`;*/
     }
     console.log('Nome inválido!');
     console.log('Status code: ' + erro.response.status);
 }
+
 function renderizarMensagens(listaDeMensagens){
     const containerMensagens = document.querySelector('.container-mensagens');
     containerMensagens.innerHTML = '';
@@ -99,6 +109,19 @@ function renderizarMensagens(listaDeMensagens){
     }
 }
 
+function renderizarUsuarios(listaDeUsuarios){
+    const containerUsuarios = document.querySelector('.container-usuarios');
+    console.log(listaDeUsuarios);
+    for(let i=0; i < listaDeUsuarios.length; i++){
+        containerUsuarios.innerHTML += `
+        <div onclick="checkUsuario(this)" class="usuario">
+            <ion-icon class="icone-menu" name="person-circle"></ion-icon>
+            <div class="nome-usuario">${listaDeUsuarios[i].name}</div>
+            <ion-icon class = "check escondido" name="checkmark"></ion-icon>
+        </div>` 
+    }
+}
+
 function enviarMensagem(){
     const inputMensagem = document.querySelector(".escrever-mensagem");
     const mensagem = inputMensagem.value;
@@ -106,7 +129,7 @@ function enviarMensagem(){
         from: `${nome}`,
         to: "Todos",
         text: `${mensagem}`,
-        type: "message" // ou "private_message" para o bônus
+        type: "message"
     };
     const promessaMensagem = axios.post('https://mock-api.driven.com.br/api/vm/uol/messages', mensagemASerEnviada);
     promessaMensagem.then(mensagemEnviadaComSucesso);
@@ -132,4 +155,22 @@ function abrirMenuLateral(){
 function fecharMenuLateral(menu){
     const conteinerDoMenu = menu.parentNode;
     conteinerDoMenu.classList.add('escondido');
+}
+function checkUsuario(opcaoUsuario){
+    const selecionadoAnteriormente = document.querySelector('.usuario.selecionado');
+    selecionadoAnteriormente.classList.remove('selecionado');
+    const checkAnterior = selecionadoAnteriormente.querySelector('.check');
+    checkAnterior.classList.add('escondido');
+    opcaoUsuario.classList.add('selecionado');
+    const checkAtual = opcaoUsuario.querySelector('.check');
+    checkAtual.classList.remove('escondido');
+}
+function checkVisibilidade(opcaoVisibilidade){
+    const visibilidadeAnterior = document.querySelector('.visibilidade.selecionado');
+    visibilidadeAnterior.classList.remove('selecionado');
+    const checkVAnterior = visibilidadeAnterior.querySelector('.check');
+    checkVAnterior.classList.add('escondido');
+    opcaoVisibilidade.classList.add('selecionado');
+    const checkVAtual = opcaoVisibilidade.querySelector('.check');
+    checkVAtual.classList.remove('escondido');
 }

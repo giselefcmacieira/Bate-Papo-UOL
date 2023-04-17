@@ -36,27 +36,23 @@
         </div>
         <div class="menu-lateral">
             <p>Escolha um contato para enviar mensagem:</p>
-            <div onclick="check()" class="usuario">
-                <ion-icon class="icone-menu" name="people"></ion-icon>
-                <div class="nome-usuario">Todos</div>
-            </div>
-            <div onclick="check()" class="usuario">
-                <ion-icon class="icone-menu" name="person-circle"></ion-icon>
-                <div class="nome-usuario">João</div>
-            </div>
-            <div onclick="check()" class="usuario">
-                <ion-icon class="icone-menu" name="person-circle"></ion-icon>
-                <div class="nome-usuario">Maria</div>
+            <div class="container-usuarios"> 
+                <div onclick="checkUsuario(this)" class="usuario selecionado">
+                    <ion-icon class="icone-menu" name="people"></ion-icon>
+                    <div class="nome-usuario">Todos</div>
+                    <ion-icon class = "check" name="checkmark"></ion-icon>
+                </div>
             </div>
             <p>Escolha a visibilidade:</p>
-            <div onclick="check()" class="visibilidade">
+            <div onclick="checkVisibilidade(this)" class="visibilidade selecionado">
                 <ion-icon class="icone-menu-visibilidade" name="lock-open"></ion-icon>
                 <div class="tipo-visibilidade">Público</div>
-                <ion-icon name="checkmark"></ion-icon>
+                <ion-icon class = "check" name="checkmark"></ion-icon>
             </div>
-            <div onclick="check()" class="visibilidade">
+            <div onclick="checkVisibilidade(this)" class="visibilidade">
                 <ion-icon class="icone-menu-visibilidade" name="lock-open"></ion-icon>
                 <div class="tipo-visibilidade">Reservadamente</div>
+                <ion-icon class = "check escondido" name="checkmark"></ion-icon>
             </div>
         </div>
     </div>
